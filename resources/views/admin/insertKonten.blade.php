@@ -41,7 +41,7 @@
         .file-input-wrapper .btn-icon {
             position: absolute;
             right: 10px;
-            top: 30px;
+            top: 35px;
             /* Sesuaikan nilai ini sesuai kebutuhan */
             padding: 5px 10px;
         }
