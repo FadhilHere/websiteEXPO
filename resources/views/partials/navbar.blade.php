@@ -37,6 +37,7 @@
 
 
 
+
             <!-- Download Button -->
             <div class="hidden lg:flex items-center ms-3">
                 <a href="https://1.envato.market/prompt-tailwind" target="_blank" class="bg-primary text-white px-4 py-2 rounded inline-flex items-center text-sm">Login</a>
