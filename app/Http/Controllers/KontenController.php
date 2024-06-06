@@ -45,7 +45,7 @@ class KontenController extends Controller
             'isi' => 'nullable|string',
             'menu' => 'nullable|string|max:255',
             'submenu' => 'nullable|string|max:255',
-            'file.*' => 'nullable|file|mimes:jpg,jpeg,png,pdf,doc,docx|max:4096',
+            'file.*' => 'nullable|file|mimes:jpg,jpeg,png,pdf,doc,docx,svg|max:4096',
             'status' => 'nullable|string|max:255',
         ]);
         $files = [];

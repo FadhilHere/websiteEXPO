@@ -1,3 +1,5 @@
+
+
 <!-- =========== Navbar Start =========== -->
 <header id="navbar" class="@@link-color fixed top-0 inset-x-0 flex items-center z-40 w-full lg:bg-transparent bg-white transition-all py-5">
     <div class="container">
@@ -10,118 +12,30 @@
             <!-- Nevigation Menu -->
             <div class="hidden lg:block ms-auto">
                 <ul class="navbar-nav flex gap-x-3 items-center justify-center">
-                    <!-- Home Page Link -->
                     @foreach($loadHeader as $header)
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">{{ $header->judul }}</a>
-                    </li>
+                        <li class="nav-item">
+                            @if(isset($loadDropdown[$header->judul]))
+                                <a href="javascript:void(0);" class="nav-link after:absolute hover:after:-bottom-10 after:inset-0" data-fc-trigger="hover" data-fc-target="dropdownMenu{{ $header->id }}" data-fc-type="dropdown" data-fc-placement="bottom">
+                                    {{ $header->judul }} <i class="fa-solid fa-angle-down ms-2 align-middle"></i>
+                                </a>
+                                <div id="dropdownMenu{{ $header->id }}" class="hidden opacity-0 mt-4 fc-dropdown-open:opacity-100 fc-dropdown-open:translate-y-0 translate-y-3 origin-center transition-all bg-white rounded-lg shadow-lg border p-2 w-48 space-y-1.5">
+                                    @foreach($loadDropdown[$header->judul] as $dropdown)
+                                        <div class="nav-item">
+                                            <a class="nav-link" href="{{ route('page', ['page' => $dropdown->link]) }}">{{ $dropdown->judul }}</a>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @else
+                                <a class="nav-link" href="{{ route('page', ['page' => $header->link]) }}">{{ $header->judul }}</a>
+                            @endif
+                        </li>
                     @endforeach
-                    <!-- Inner Page Dropdown -->
-                    <li class="nav-item">
-                        <a href="javascript:void(0);" class="nav-link after:absolute hover:after:-bottom-10 after:inset-0" data-fc-trigger="hover" data-fc-target="innerPageDropdownMenu" data-fc-type="dropdown" data-fc-placement="bottom">
-                            Pages <i class="fa-solid fa-angle-down ms-2 align-middle"></i>
-                        </a>
-
-                        <div id="innerPageDropdownMenu" class="hidden opacity-0 mt-4 fc-dropdown-open:opacity-100 fc-dropdown-open:translate-y-0 translate-y-3 origin-center transition-all bg-white rounded-lg shadow-lg border p-2 w-48 space-y-1.5">
-                            <!-- Dropdown item -->
-                            <div class="nav-item">
-                                <a class="nav-link after:absolute after:inset-0 after:-end-10" data-fc-offset="8" data-fc-placement="right-start" data-fc-trigger="hover" data-fc-type="dropdown" type="button">
-                                    Account <i class="fa-solid fa-angle-right ms-auto align-middle"></i>
-                                </a>
-
-                                <div class="ms-2 hidden w-48 opacity-0 fc-dropdown-open:opacity-100 fc-dropdown-open:translate-y-0 translate-y-3 origin-center transition-all bg-white rounded-lg shadow-lg border p-2 space-y-1.5">
-                                    <div class="nav-item">
-                                        <a class="nav-link" href="account-dashboard.html">Dashboard</a>
-                                    </div>
-
-                                    <div class="nav-item">
-                                        <a class="nav-link" href="account-settings.html">Settings</a>
-                                    </div>
-
-                                    <div class="nav-item">
-                                        <a class="nav-link" href="account-login.html">Login</a>
-                                    </div>
-
-                                    <div class="nav-item">
-                                        <a class="nav-link" href="account-signup.html">Sign Up</a>
-                                    </div>
-
-                                    <div class="nav-item">
-                                        <a class="nav-link" href="account-forget-password.html">Forget Password</a>
-                                    </div>
-
-                                    <div class="nav-item">
-                                        <a class="nav-link" href="account-confirm.html">Confirm Account</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Dropdown item -->
-                            <div class="nav-item">
-                                <a class="nav-link after:absolute after:inset-0 after:-end-10" data-fc-offset="8" data-fc-placement="right-start" data-fc-trigger="hover" data-fc-type="dropdown" type="button">
-                                    Blog <i class="fa-solid fa-angle-right ms-auto align-middle"></i>
-                                </a>
-
-                                <div class="ms-2 hidden w-48 opacity-0 fc-dropdown-open:opacity-100 fc-dropdown-open:translate-y-0 translate-y-3 origin-center transition-all bg-white rounded-lg shadow-lg border p-2 space-y-1.5">
-                                    <div class="nav-item">
-                                        <a class="nav-link" href="blog.html">Blog</a>
-                                    </div>
-
-                                    <div class="nav-item">
-                                        <a class="nav-link" href="blog-post.html">Blog Post</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <hr class="-mx-2 my-2">
-
-                            <!-- Dropdown item -->
-                            <div class="nav-item">
-                                <a class="nav-link" href="company.html">Company</a>
-                            </div>
-
-                            <!-- Dropdown item -->
-                            <div class="nav-item">
-                                <a class="nav-link" href="career.html">Career</a>
-                            </div>
-
-                            <!-- Dropdown item -->
-                            <div class="nav-item">
-                                <a class="nav-link" href="pricing.html">Pricing</a>
-                            </div>
-
-                            <!-- Dropdown item -->
-                            <div class="nav-item">
-                                <a class="nav-link after:absolute after:inset-0 after:-end-10" data-fc-offset="8" data-fc-placement="right-start" data-fc-trigger="hover" data-fc-type="dropdown" type="button">
-                                    Portfolio <i class="fa-solid fa-angle-right ms-auto align-middle"></i>
-                                </a>
-
-                                <div class="ms-2 hidden w-48 opacity-0 fc-dropdown-open:opacity-100 fc-dropdown-open:translate-y-0 translate-y-3 origin-center transition-all bg-white rounded-lg shadow-lg border p-2 space-y-1.5">
-                                    <div class="nav-item">
-                                        <a class="nav-link" href="portfolio-grid.html">Portfolio Grid</a>
-                                    </div>
-
-                                    <div class="nav-item">
-                                        <a class="nav-link" href="portfolio-masonry.html">Portfolio Masonry</a>
-                                    </div>
-
-                                    <div class="nav-item">
-                                        <a class="nav-link" href="portfolio-item.html">Portfolio Item</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <hr class="-mx-2 my-2">
-
-                            <!-- Dropdown item -->
-                            <div class="nav-item">
-                                <a class="nav-link" href="help.html">Help</a>
-                            </div>
-                        </div>
-                    </li>
-
                 </ul>
             </div>
+
+
+
+
 
             <!-- Download Button -->
             <div class="hidden lg:flex items-center ms-3">

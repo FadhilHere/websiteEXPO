@@ -12,12 +12,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $loadLogo = ManagementKonten::where('kategori', 'logo')->first();
+        $loadLogo = ManagementKonten::where('menu', 'Logo')->first();
+        $loadLogo = str_replace(['[', ']', '\/', '"'], '', $loadLogo->file);
+        $loadLogo = preg_replace('/(uploads)([^\/])/', '$1/$2', $loadLogo);
+
+// Now $file will contain: uploads/jZwgboDTC0UklKo2iwQlMef1dFT5Lbzo1ly0FsPT.svg
+
         $loadHeader = ManagementKonten::where('menu', 'Header')->get();
-        $loadSubmenu = ManagementKonten::whereNotNull('submenu')->get()->groupBy('menu');
-        return view('index', compact('loadLogo', 'loadHeader', 'loadSubmenu'));
-
-
+        $loadDropdown = ManagementKonten::whereNotNull('menu')->get()->groupBy('menu');
+        return view('index', compact('loadLogo', 'loadHeader', 'loadDropdown'));
     }
 
     /**
