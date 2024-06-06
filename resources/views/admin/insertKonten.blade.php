@@ -36,14 +36,23 @@
 
         .file-input-wrapper {
             position: relative;
+            margin-bottom: 10px;
         }
 
         .file-input-wrapper .btn-icon {
             position: absolute;
-            right: 10px;
             top: 35px;
-            /* Sesuaikan nilai ini sesuai kebutuhan */
             padding: 5px 10px;
+        }
+
+        .file-input-wrapper .add-file-input {
+            right: 50px;
+            /* Adjust this value to position the button correctly */
+        }
+
+        .file-input-wrapper .remove-file-input {
+            right: 10px;
+            /* Adjust this value to position the button correctly */
         }
     </style>
 
@@ -210,8 +219,12 @@
                                                     <label>File</label>
                                                     <input type="file" name="file[]" class="form-control">
                                                     <button type="button"
-                                                        class="btn btn-icon btn-secondary add-file-input">
+                                                        class="btn btn-icon btn-primary add-file-input">
                                                         <i class="fas fa-plus"></i>
+                                                    </button>
+                                                    <button type="button"
+                                                        class="btn btn-icon btn-danger remove-file-input">
+                                                        <i class="fas fa-minus"></i>
                                                     </button>
                                                 </div>
                                             </div>
@@ -475,11 +488,18 @@
                     '<div class="form-group file-input-wrapper">' +
                     '<label>File</label>' +
                     '<input type="file" name="file[]" class="form-control">' +
-                    '<button type="button" class="btn btn-icon btn-secondary add-file-input">' +
+                    '<button type="button" class="btn btn-icon btn-primary add-file-input">' +
                     '<i class="fas fa-plus"></i>' +
+                    '</button>' +
+                    '<button type="button" class="btn btn-icon btn-danger remove-file-input">' +
+                    '<i class="fas fa-minus"></i>' +
                     '</button>' +
                     '</div>'
                 );
+            });
+
+            $(document).on('click', '.remove-file-input', function() {
+                $(this).closest('.file-input-wrapper').remove();
             });
         });
     </script>
