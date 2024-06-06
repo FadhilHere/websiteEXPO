@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\KontenController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 
@@ -15,3 +16,7 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [HomeController::class, 'index']);
+
+
+Route::prefix('admin')->group(function () { Route::resource('/konten', KontenController::class);
+});

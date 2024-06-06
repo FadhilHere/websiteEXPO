@@ -13,7 +13,11 @@ class HomeController extends Controller
     public function index()
     {
         $loadLogo = ManagementKonten::where('kategori', 'logo')->first();
-        return view('index', compact('loadLogo'));
+        $loadHeader = ManagementKonten::where('menu', 'Header')->get();
+        $loadSubmenu = ManagementKonten::whereNotNull('submenu')->get()->groupBy('menu');
+        return view('index', compact('loadLogo', 'loadHeader', 'loadSubmenu'));
+
+
     }
 
     /**
