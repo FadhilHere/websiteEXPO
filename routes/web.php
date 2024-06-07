@@ -15,7 +15,8 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
-Route::get('/{judul}', [HomeController::class, 'page'])->name('show');
-Route::prefix('admin')->group(function () { Route::resource('/konten', KontenController::class);
+Route::get('/', [HomeController::class, 'index'])->name('home')->withoutMiddleware('auth');
+Route::get('/{judul}', [HomeController::class, 'page'])->name('show')->withoutMiddleware('auth');
+Route::prefix('admin')->group(function () { Route::resource('/konten', KontenController::class)->withoutMiddleware('auth');
+Route::get('/login', [HomeController::class, 'login'])->name('login');
 });

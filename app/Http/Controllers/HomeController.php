@@ -7,9 +7,12 @@ use App\Models\ManagementKonten;
 
 class HomeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $loadLogo = ManagementKonten::where('menu', 'Logo')->first();
@@ -19,6 +22,14 @@ class HomeController extends Controller
         $loadHeader = ManagementKonten::where('menu', 'Header')->get();
         $loadDropdown = ManagementKonten::whereNotNull('menu')->get()->groupBy('menu');
         return view('index', compact('loadLogo', 'loadHeader', 'loadDropdown'));
+    }
+
+    public function login()
+    {
+        $loadLogo = ManagementKonten::where('menu', 'Logo')->first();
+        $loadLogo = str_replace(['[', ']', '\/', '"'], '', $loadLogo->file);
+        $loadLogo = preg_replace('/(uploads)([^\/])/', '$1/$2', $loadLogo);
+        return view('admin.login', compact('loadLogo'));
     }
 
     public function page()

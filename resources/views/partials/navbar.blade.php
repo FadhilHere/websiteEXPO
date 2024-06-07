@@ -25,6 +25,8 @@
                                         </div>
                                     @endforeach
                                 </div>
+                            @elseif ($header->judul == 'Beranda' || $header->judul == 'Home')
+                            <a class="nav-link" href="{{ route('home') }}">{{ $header->judul }}</a>
                             @else
                                 <a class="nav-link" href="{{ route('show', $header->judul) }}">{{ $header->judul }}</a>
                             @endif
@@ -40,7 +42,7 @@
 
             <!-- Download Button -->
             <div class="hidden lg:flex items-center ms-3">
-                <a href="https://1.envato.market/prompt-tailwind" target="_blank" class="bg-primary text-white px-4 py-2 rounded inline-flex items-center text-sm">Login</a>
+                <a href="{{ route('login') }}" class="bg-primary text-white px-4 py-2 rounded inline-flex items-center text-sm">Login</a>
             </div>
 
             <!-- Moblie Menu Toggle Button (Offcanvas Button) -->
@@ -60,7 +62,7 @@
         <!-- Mobile Menu Topbar Logo (Header) -->
         <div class="p-6 flex items-center justify-between">
             <a href="index.html">
-                <img src="assets/images/logo-dark.png" class="h-8" alt="Logo">
+                @include('partials.logo')
             </a>
 
             <button data-fc-dismiss class="flex items-center px-2">
