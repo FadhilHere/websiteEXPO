@@ -21,12 +21,12 @@
                                 <div id="dropdownMenu{{ $header->id }}" class="hidden opacity-0 mt-4 fc-dropdown-open:opacity-100 fc-dropdown-open:translate-y-0 translate-y-3 origin-center transition-all bg-white rounded-lg shadow-lg border p-2 w-48 space-y-1.5">
                                     @foreach($loadDropdown[$header->judul] as $dropdown)
                                         <div class="nav-item">
-                                            <a class="nav-link" href="{{ route('page', ['page' => $dropdown->link]) }}">{{ $dropdown->judul }}</a>
+                                            <a class="nav-link" href="{{ route('show', $dropdown->judul) }}">{{ $dropdown->judul }}</a>
                                         </div>
                                     @endforeach
                                 </div>
                             @else
-                                <a class="nav-link" href="{{ route('page', ['page' => $header->link]) }}">{{ $header->judul }}</a>
+                                <a class="nav-link" href="{{ route('show', $header->judul) }}">{{ $header->judul }}</a>
                             @endif
                         </li>
                     @endforeach

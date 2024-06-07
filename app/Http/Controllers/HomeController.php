@@ -16,11 +16,20 @@ class HomeController extends Controller
         $loadLogo = str_replace(['[', ']', '\/', '"'], '', $loadLogo->file);
         $loadLogo = preg_replace('/(uploads)([^\/])/', '$1/$2', $loadLogo);
 
-// Now $file will contain: uploads/jZwgboDTC0UklKo2iwQlMef1dFT5Lbzo1ly0FsPT.svg
-
         $loadHeader = ManagementKonten::where('menu', 'Header')->get();
         $loadDropdown = ManagementKonten::whereNotNull('menu')->get()->groupBy('menu');
         return view('index', compact('loadLogo', 'loadHeader', 'loadDropdown'));
+    }
+
+    public function page()
+    {
+        $loadLogo = ManagementKonten::where('menu', 'Logo')->first();
+        $loadLogo = str_replace(['[', ']', '\/', '"'], '', $loadLogo->file);
+        $loadLogo = preg_replace('/(uploads)([^\/])/', '$1/$2', $loadLogo);
+
+        $loadHeader = ManagementKonten::where('menu', 'Header')->get();
+        $loadDropdown = ManagementKonten::whereNotNull('menu')->get()->groupBy('menu');
+        return view('page', compact('loadLogo', 'loadHeader', 'loadDropdown'));
     }
 
     /**

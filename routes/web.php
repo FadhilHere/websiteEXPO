@@ -16,8 +16,6 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [HomeController::class, 'index']);
-
-Route::get('/{page}', [HomeController::class, 'show'])->name('page');
-
+Route::get('/{judul}', [HomeController::class, 'page'])->name('show');
 Route::prefix('admin')->group(function () { Route::resource('/konten', KontenController::class);
 });
