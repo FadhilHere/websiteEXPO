@@ -128,7 +128,7 @@
                         </a>
                     </div>
                     <ul class="sidebar-menu">
-                        <li class="dropdown active">
+                        <li class="dropdown">
                             <a href="{{ route('konten.index') }}" class="nav-link toggled"><svg
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -139,19 +139,8 @@
                                     <line x1="12" y1="17" x2="12" y2="21"></line>
                                 </svg><span>Tambah Konten</span></a>
                         </li>
-                        <li class="dropdown">
-                            <a href="{{ route('katalog.index') }}" class="nav-link toggled"><svg
-                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-monitor">
-                                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2">
-                                    </rect>
-                                    <line x1="8" y1="21" x2="16" y2="21"></line>
-                                    <line x1="12" y1="17" x2="12" y2="21"></line>
-                                </svg><span>Tambah Katalog</span></a>
-                        </li>
                         <li class="menu-header">Table</li>
-                        <li class="dropdown">
+                        <li class="dropdown active">
                             <a href="#" class="menu-toggle nav-link has-dropdown toggled"><svg
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -162,7 +151,7 @@
                                     <rect x="3" y="14" width="7" height="7"></rect>
                                 </svg><span>Tables</span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link " href="{{ route('konten.list') }}">Tabel
+                                <li class="active"><a class="nav-link " href="{{ route('konten.list') }}">Tabel
                                         Konten</a> </li>
                                 <li><a class="nav-link " href="{{ route('konten.list') }}">Tabel
                                         Katalog</a> </li>
@@ -176,190 +165,256 @@
                 <section class="section">
                     <div class="section-body">
                         <div class="row">
-                            <div class="col-12 col-md-12 col-lg-12">
+                            <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4>Tambah Data</h4>
+                                        <h4>List</h4>
                                     </div>
                                     <div class="card-body">
-                                        <form action="{{ route('konten.store') }}" method="POST"
-                                            enctype="multipart/form-data">
-                                            @csrf
-                                            <div class="form-group">
-                                                <label>Kategori</label>
-                                                <input type="text" name="kategori" class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Judul</label>
-                                                <input type="text" name="judul" class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Jenis</label>
-                                                <input type="text" name="jenis" class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Isi</label>
-                                                <textarea name="isi" id="isi" class="form-control"></textarea>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Menu</label>
-                                                <select name="menu" class="form-control">
-                                                    <option value="">Pilih Menu</option>
-                                                    @foreach ($kategoriOptions as $id => $kategori)
-                                                        <option value="{{ $kategori }}">{{ $kategori }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Submenu</label>
-                                                <input type="text" name="submenu" class="form-control">
-                                            </div>
-                                            <div id="file-inputs">
-                                                <div class="form-group file-input-wrapper">
-                                                    <label>File</label>
-                                                    <input type="file" name="file[]" class="form-control">
-                                                    <button type="button"
-                                                        class="btn btn-icon btn-primary add-file-input">
-                                                        <i class="fas fa-plus"></i>
-                                                    </button>
-                                                    <button type="button"
-                                                        class="btn btn-icon btn-danger remove-file-input">
-                                                        <i class="fas fa-minus"></i>
-                                                    </button>
+                                        <div class="table-responsive">
+                                            <div id="table-1_wrapper"
+                                                class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+                                                <div class="row">
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label>Status</label>
-                                                <input type="text" name="status" class="form-control">
-                                            </div>
-                                            <div class="card-footer text-end">
-                                                <button class="btn btn-primary mr-1" type="submit">Submit</button>
-                                                <button class="btn btn-secondary" type="reset">Reset</button>
-                                            </div>
-                                        </form>
+                                        </div>
+                                        <div class="row">
+                                            <table class="table table-striped dataTable no-footer" id="table-1"
+                                                role="grid" aria-describedby="table-1_info">
+                                                <thead>
+                                                    <tr role="row">
+                                                        <th class="text-center sorting_asc" tabindex="0"
+                                                            aria-controls="table-1" rowspan="1" colspan="1"
+                                                            aria-sort="ascending"
+                                                            aria-label="#: activate to sort column descending"
+                                                            style="width: 35.9px;">
+                                                            #</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="table-1"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Kategori: activate to sort column ascending">
+                                                            Kategori</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="table-1"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Judul: activate to sort column ascending">Judul
+                                                        </th>
+                                                        <th class="sorting" tabindex="0" aria-controls="table-1"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Jenis: activate to sort column ascending">Jenis
+                                                        </th>
+                                                        <th class="sorting" tabindex="0" aria-controls="table-1"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Isi: activate to sort column ascending">Isi
+                                                        </th>
+                                                        <th class="sorting" tabindex="0" aria-controls="table-1"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Menu: activate to sort column ascending">Menu
+                                                        </th>
+                                                        <th class="sorting" tabindex="0" aria-controls="table-1"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Submenu: activate to sort column ascending">
+                                                            Submenu</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="table-1"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="File: activate to sort column ascending">File
+                                                        </th>
+                                                        <th class="sorting" tabindex="0" aria-controls="table-1"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Status: activate to sort column ascending">
+                                                            Status</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="table-1"
+                                                            rowspan="1" colspan="1" aria-label="Actions"
+                                                            style="width: 182.087px;">Actions
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @forelse ($konten as $index => $item)
+                                                        <tr>
+                                                            <td>{{ $index + 1 }}</td>
+                                                            <td>{{ $item->kategori }}</td>
+                                                            <td>{{ $item->judul }}</td>
+                                                            <td>{{ $item->jenis }}</td>
+                                                            <td>{{ $item->isi }}</td>
+                                                            <td>{{ $item->menu }}</td>
+                                                            <td>{{ $item->submenu }}</td>
+                                                            <td>
+                                                                @if ($item->file && is_array(json_decode($item->file)))
+                                                                    <!-- Menampilkan gambar pertama saja -->
+                                                                    @php $firstImage = true; @endphp
+                                                                    @foreach (json_decode($item->file) as $file)
+                                                                        @if ($firstImage)
+                                                                            <a href="#"
+                                                                                class="btn btn-primary btn-sm view-image"
+                                                                                data-toggle="modal"
+                                                                                data-target="#imageModal"
+                                                                                data-image="{{ asset('storage/' . $file) }}">Lihat
+                                                                                Gambar</a>
+                                                                            @php $firstImage = false; @endphp
+                                                                        @endif
+                                                                        <br>
+                                                                    @endforeach
+                                                                @endif
+                                                            </td>
+
+
+
+                                                            <td>{{ $item->status }}</td>
+                                                            <td class="text-center">
+                                                                <!-- Actions (e.g., edit and delete buttons) -->
+                                                            </td>
+                                                        </tr>
+                                                    @empty
+                                                        <tr>
+                                                            <td colspan="10" class="text-center">
+                                                                <div class="alert alert-danger">
+                                                                    Data belum tersedia.
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    @endforelse
+                                                </tbody>
+                                            </table>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
-                <div class="settingSidebar">
-                    <a href="javascript:void(0)" class="settingPanelToggle"> <i class="fa fa-spin fa-cog"></i>
-                    </a>
-                    <div class="settingSidebar-body ps-container ps-theme-default"
-                        style="overflow: hidden; outline: none;" tabindex="2">
-                        <div class=" fade show active">
-                            <div class="setting-panel-header">Setting Panel
-                            </div>
-                            <div class="p-15 border-bottom">
-                                <h6 class="font-medium m-b-10">Select Layout</h6>
-                                <div class="selectgroup layout-color w-50">
-                                    <label class="selectgroup-item">
-                                        <input type="radio" name="value" value="1"
-                                            class="selectgroup-input-radio select-layout" checked="">
-                                        <span class="selectgroup-button">Light</span>
-                                    </label>
-                                    <label class="selectgroup-item">
-                                        <input type="radio" name="value" value="2"
-                                            class="selectgroup-input-radio select-layout">
-                                        <span class="selectgroup-button">Dark</span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="p-15 border-bottom">
-                                <h6 class="font-medium m-b-10">Sidebar Color</h6>
-                                <div class="selectgroup selectgroup-pills sidebar-color">
-                                    <label class="selectgroup-item">
-                                        <input type="radio" name="icon-input" value="1"
-                                            class="selectgroup-input select-sidebar">
-                                        <span class="selectgroup-button selectgroup-button-icon"
-                                            data-bs-toggle="tooltip" data-original-title="Light Sidebar"><i
-                                                class="fas fa-sun"></i></span>
-                                    </label>
-                                    <label class="selectgroup-item">
-                                        <input type="radio" name="icon-input" value="2"
-                                            class="selectgroup-input select-sidebar" checked="">
-                                        <span class="selectgroup-button selectgroup-button-icon"
-                                            data-bs-toggle="tooltip" data-original-title="Dark Sidebar"><i
-                                                class="fas fa-moon"></i></span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="p-15 border-bottom">
-                                <h6 class="font-medium m-b-10">Color Theme</h6>
-                                <div class="theme-setting-options">
-                                    <ul class="choose-theme list-unstyled mb-0">
-                                        <li title="white" class="active">
-                                            <div class="white"></div>
-                                        </li>
-                                        <li title="cyan">
-                                            <div class="cyan"></div>
-                                        </li>
-                                        <li title="black">
-                                            <div class="black"></div>
-                                        </li>
-                                        <li title="purple">
-                                            <div class="purple"></div>
-                                        </li>
-                                        <li title="orange">
-                                            <div class="orange"></div>
-                                        </li>
-                                        <li title="green">
-                                            <div class="green"></div>
-                                        </li>
-                                        <li title="red">
-                                            <div class="red"></div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="p-15 border-bottom">
-                                <div class="theme-setting-options">
-                                    <label class="m-b-0">
-                                        <input type="checkbox" name="custom-switch-checkbox"
-                                            class="custom-switch-input" id="mini_sidebar_setting">
-                                        <span class="custom-switch-indicator"></span>
-                                        <span class="control-label p-l-10">Mini Sidebar</span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="p-15 border-bottom">
-                                <div class="theme-setting-options">
-                                    <label class="m-b-0">
-                                        <input type="checkbox" name="custom-switch-checkbox"
-                                            class="custom-switch-input" id="sticky_header_setting">
-                                        <span class="custom-switch-indicator"></span>
-                                        <span class="control-label p-l-10">Sticky Header</span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="mt-4 mb-4 p-3 align-center rt-sidebar-last-ele">
-                                <a href="#" class="btn btn-icon icon-left btn-primary btn-restore-theme">
-                                    <i class="fas fa-undo"></i> Restore Default
-                                </a>
-                            </div>
+
+            </div>
+            </section>
+            <div class="modal fade" id="imageModal" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Gambar</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
-                    </div>
-                    <div id="ascrail2001" class="nicescroll-rails nicescroll-rails-vr"
-                        style="width: 8px; z-index: 999; cursor: default; position: absolute; top: 0px; left: 272px; height: 911px; display: none;">
-                        <div class="nicescroll-cursors"
-                            style="position: relative; top: 0px; float: right; width: 6px; height: 0px; background-color: rgb(66, 66, 66); border: 1px solid rgb(255, 255, 255); background-clip: padding-box; border-radius: 5px;">
-                        </div>
-                    </div>
-                    <div id="ascrail2001-hr" class="nicescroll-rails nicescroll-rails-hr"
-                        style="height: 8px; z-index: 999; top: 903px; left: 0px; position: absolute; cursor: default; display: none;">
-                        <div class="nicescroll-cursors"
-                            style="position: absolute; top: 0px; height: 6px; width: 0px; background-color: rgb(66, 66, 66); border: 1px solid rgb(255, 255, 255); background-clip: padding-box; border-radius: 5px;">
+                        <div class="modal-body">
+                            <!-- Tempat untuk menampilkan gambar -->
+                            <img src="" class="img-fluid" id="imagePreview" alt="Gambar">
                         </div>
                     </div>
                 </div>
             </div>
-
-
-
-
+            <div class="settingSidebar">
+                <a href="javascript:void(0)" class="settingPanelToggle"> <i class="fa fa-spin fa-cog"></i>
+                </a>
+                <div class="settingSidebar-body ps-container ps-theme-default"
+                    style="overflow: hidden; outline: none;" tabindex="2">
+                    <div class=" fade show active">
+                        <div class="setting-panel-header">Setting Panel
+                        </div>
+                        <div class="p-15 border-bottom">
+                            <h6 class="font-medium m-b-10">Select Layout</h6>
+                            <div class="selectgroup layout-color w-50">
+                                <label class="selectgroup-item">
+                                    <input type="radio" name="value" value="1"
+                                        class="selectgroup-input-radio select-layout" checked="">
+                                    <span class="selectgroup-button">Light</span>
+                                </label>
+                                <label class="selectgroup-item">
+                                    <input type="radio" name="value" value="2"
+                                        class="selectgroup-input-radio select-layout">
+                                    <span class="selectgroup-button">Dark</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="p-15 border-bottom">
+                            <h6 class="font-medium m-b-10">Sidebar Color</h6>
+                            <div class="selectgroup selectgroup-pills sidebar-color">
+                                <label class="selectgroup-item">
+                                    <input type="radio" name="icon-input" value="1"
+                                        class="selectgroup-input select-sidebar">
+                                    <span class="selectgroup-button selectgroup-button-icon" data-bs-toggle="tooltip"
+                                        data-original-title="Light Sidebar"><i class="fas fa-sun"></i></span>
+                                </label>
+                                <label class="selectgroup-item">
+                                    <input type="radio" name="icon-input" value="2"
+                                        class="selectgroup-input select-sidebar" checked="">
+                                    <span class="selectgroup-button selectgroup-button-icon" data-bs-toggle="tooltip"
+                                        data-original-title="Dark Sidebar"><i class="fas fa-moon"></i></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="p-15 border-bottom">
+                            <h6 class="font-medium m-b-10">Color Theme</h6>
+                            <div class="theme-setting-options">
+                                <ul class="choose-theme list-unstyled mb-0">
+                                    <li title="white" class="active">
+                                        <div class="white"></div>
+                                    </li>
+                                    <li title="cyan">
+                                        <div class="cyan"></div>
+                                    </li>
+                                    <li title="black">
+                                        <div class="black"></div>
+                                    </li>
+                                    <li title="purple">
+                                        <div class="purple"></div>
+                                    </li>
+                                    <li title="orange">
+                                        <div class="orange"></div>
+                                    </li>
+                                    <li title="green">
+                                        <div class="green"></div>
+                                    </li>
+                                    <li title="red">
+                                        <div class="red"></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="p-15 border-bottom">
+                            <div class="theme-setting-options">
+                                <label class="m-b-0">
+                                    <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input"
+                                        id="mini_sidebar_setting">
+                                    <span class="custom-switch-indicator"></span>
+                                    <span class="control-label p-l-10">Mini Sidebar</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="p-15 border-bottom">
+                            <div class="theme-setting-options">
+                                <label class="m-b-0">
+                                    <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input"
+                                        id="sticky_header_setting">
+                                    <span class="custom-switch-indicator"></span>
+                                    <span class="control-label p-l-10">Sticky Header</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="mt-4 mb-4 p-3 align-center rt-sidebar-last-ele">
+                            <a href="#" class="btn btn-icon icon-left btn-primary btn-restore-theme">
+                                <i class="fas fa-undo"></i> Restore Default
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div id="ascrail2001" class="nicescroll-rails nicescroll-rails-vr"
+                    style="width: 8px; z-index: 999; cursor: default; position: absolute; top: 0px; left: 272px; height: 911px; display: none;">
+                    <div class="nicescroll-cursors"
+                        style="position: relative; top: 0px; float: right; width: 6px; height: 0px; background-color: rgb(66, 66, 66); border: 1px solid rgb(255, 255, 255); background-clip: padding-box; border-radius: 5px;">
+                    </div>
+                </div>
+                <div id="ascrail2001-hr" class="nicescroll-rails nicescroll-rails-hr"
+                    style="height: 8px; z-index: 999; top: 903px; left: 0px; position: absolute; cursor: default; display: none;">
+                    <div class="nicescroll-cursors"
+                        style="position: absolute; top: 0px; height: 6px; width: 0px; background-color: rgb(66, 66, 66); border: 1px solid rgb(255, 255, 255); background-clip: padding-box; border-radius: 5px;">
+                    </div>
+                </div>
+            </div>
         </div>
+
+
+
+
+    </div>
 
     </div>
 
@@ -477,6 +532,13 @@
 
     </div>
     </div>
+    <script>
+        $(document).on('click', '.view-image', function() {
+            var imageUrl = $(this).data('image');
+            $('#imagePreview').attr('src', imageUrl);
+            $('#imageModal').modal('show');
+        });
+    </script>
     <script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
     <script>
         CKEDITOR.replace('isi');

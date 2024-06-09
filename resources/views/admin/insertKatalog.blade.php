@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Konten</title>
+    <title>Katalog</title>
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{{ asset('assets/css/app.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/bundles/datatables/datatables.min.css') }}">
@@ -128,7 +128,7 @@
                         </a>
                     </div>
                     <ul class="sidebar-menu">
-                        <li class="dropdown active">
+                        <li class="dropdown">
                             <a href="{{ route('konten.index') }}" class="nav-link toggled"><svg
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -139,7 +139,7 @@
                                     <line x1="12" y1="17" x2="12" y2="21"></line>
                                 </svg><span>Tambah Konten</span></a>
                         </li>
-                        <li class="dropdown">
+                        <li class="dropdown active">
                             <a href="{{ route('katalog.index') }}" class="nav-link toggled"><svg
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -179,10 +179,10 @@
                             <div class="col-12 col-md-12 col-lg-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4>Tambah Data</h4>
+                                        <h4>Tambah Katalog</h4>
                                     </div>
                                     <div class="card-body">
-                                        <form action="{{ route('konten.store') }}" method="POST"
+                                        <form action="{{ route('katalog.store') }}" method="POST"
                                             enctype="multipart/form-data">
                                             @csrf
                                             <div class="form-group">
@@ -194,31 +194,17 @@
                                                 <input type="text" name="judul" class="form-control">
                                             </div>
                                             <div class="form-group">
-                                                <label>Jenis</label>
-                                                <input type="text" name="jenis" class="form-control">
+                                                <label>Author</label>
+                                                <input type="text" name="author" class="form-control">
                                             </div>
                                             <div class="form-group">
-                                                <label>Isi</label>
-                                                <textarea name="isi" id="isi" class="form-control"></textarea>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Menu</label>
-                                                <select name="menu" class="form-control">
-                                                    <option value="">Pilih Menu</option>
-                                                    @foreach ($kategoriOptions as $id => $kategori)
-                                                        <option value="{{ $kategori }}">{{ $kategori }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Submenu</label>
-                                                <input type="text" name="submenu" class="form-control">
+                                                <label>Deskripsi</label>
+                                                <textarea name="deskripsi" class="form-control"></textarea>
                                             </div>
                                             <div id="file-inputs">
                                                 <div class="form-group file-input-wrapper">
-                                                    <label>File</label>
-                                                    <input type="file" name="file[]" class="form-control">
+                                                    <label>Foto</label>
+                                                    <input type="file" name="foto[]" class="form-control">
                                                     <button type="button"
                                                         class="btn btn-icon btn-primary add-file-input">
                                                         <i class="fas fa-plus"></i>
@@ -230,6 +216,15 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
+                                                <label for="video">Video</label>
+                                                <input type="file" name="video"
+                                                    accept="video/mp4,video/x-m4v,video/*" class="form-control-file">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Tahun</label>
+                                                <input type="date" name="tahun" class="form-control">
+                                            </div>
+                                            <div class="form-group">
                                                 <label>Status</label>
                                                 <input type="text" name="status" class="form-control">
                                             </div>
@@ -239,6 +234,7 @@
                                             </div>
                                         </form>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -488,7 +484,7 @@
                 $('#file-inputs').append(
                     '<div class="form-group file-input-wrapper">' +
                     '<label>File</label>' +
-                    '<input type="file" name="file[]" class="form-control">' +
+                    '<input type="file" name="foto[]" class="form-control">' +
                     '<button type="button" class="btn btn-icon btn-primary add-file-input">' +
                     '<i class="fas fa-plus"></i>' +
                     '</button>' +

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\KontenController;
+use App\Http\Controllers\KatalogController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,4 +21,7 @@ Route::get('/', function () {
 
 Route::prefix('admin')->group(function () {
     Route::resource('/konten', KontenController::class);
+    Route::resource('/katalog', KatalogController::class);
+    Route::get('/list', [KontenController::class, 'list'])->name('konten.list');
+    Route::get('/listKatalog', [KatalogController::class, 'listKatalog'])->name('katalog.list');
 });
