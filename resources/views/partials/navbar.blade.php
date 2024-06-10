@@ -25,8 +25,11 @@
                                         </div>
                                     @endforeach
                                 </div>
+                                @elseif ($header->judul == 'Katalog Produk' || $header->judul == 'Katalog')
+                                <a class="nav-link" href="{{ route('katalog') }}">{{ $header->judul }}</a>
                             @elseif ($header->judul == 'Beranda' || $header->judul == 'Home')
                             <a class="nav-link" href="{{ route('home') }}">{{ $header->judul }}</a>
+
                             @else
                                 <a class="nav-link" href="{{ route('show', $header->judul) }}">{{ $header->judul }}</a>
                             @endif

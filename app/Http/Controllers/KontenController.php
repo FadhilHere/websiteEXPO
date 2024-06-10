@@ -18,7 +18,20 @@ class KontenController extends Controller
         $kategoriOptions = ManagementKonten::whereNotNull('kategori')->pluck('kategori', 'id');
         return view('admin.insertKonten', compact('konten', 'kategoriOptions'));
     }
+    public function list()
+    {
+        $konten = ManagementKonten::all();
 
+        foreach ($konten as $item) {
+            // Mengganti karakter yang tidak diinginkan
+            $item->file = str_replace(['[', ']', '\/', '"'], '', $item->file);
+            // Mengubah pola string untuk path file
+            $item->file = preg_replace('/(uploads)([^\/])/', '$1/$2', $item->file);
+        }
+
+
+        return view('admin.listKonten', compact('konten'));
+    }
 
     /**
      * Show the form for creating a new resource.

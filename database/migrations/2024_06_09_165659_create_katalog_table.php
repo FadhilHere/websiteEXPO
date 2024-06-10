@@ -4,12 +4,10 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateManagementKontenTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
@@ -19,7 +17,8 @@ class CreateManagementKontenTable extends Migration
             $table->longText('judul')->nullable();
             $table->longText('author')->nullable();
             $table->longText('deskripsi')->nullable();
-            $table->longText('file')->nullable();
+            $table->longText('foto')->nullable();
+            $table->longText('video')->nullable();
             $table->date('tahun')->nullable();
             $table->longText('status')->nullable();
             $table->timestamps();
@@ -34,6 +33,4 @@ class CreateManagementKontenTable extends Migration
     {
         Schema::dropIfExists('katalog');
     }
-}
-
-
+};
