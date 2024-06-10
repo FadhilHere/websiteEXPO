@@ -17,6 +17,22 @@
     <link rel="icon" href="{{ asset('CALTEX-RIAU-LOGO.png') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+    {{-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"> --}}
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap Tags Input CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css"
+        rel="stylesheet">
+
+    <!-- Bootstrap Tags Input JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
+
     <style>
         .modal {
             z-index: 1500;
@@ -53,6 +69,36 @@
         .file-input-wrapper .remove-file-input {
             right: 10px;
             /* Adjust this value to position the button correctly */
+        }
+
+        .bootstrap-tagsinput {
+            margin: 0;
+            width: 100%;
+            padding: 0.5rem 0.75rem 0;
+            font-size: 1rem;
+            line-height: 1.25;
+            transition: border-color 0.15s ease-in-out;
+
+            &.has-focus {
+                background-color: #fff;
+                border-color: #5cb3fd;
+            }
+
+            .label-info {
+                display: inline-block;
+                background-color: #636c72;
+                padding: 0 .4em .15em;
+                border-radius: .25rem;
+                margin-bottom: 0.4em;
+            }
+
+            input {
+                margin-bottom: 0.5em;
+            }
+        }
+
+        .bootstrap-tagsinput .tag [data-role="remove"]:after {
+            content: '\00d7';
         }
     </style>
 
@@ -186,9 +232,13 @@
                                             enctype="multipart/form-data">
                                             @csrf
                                             <div class="form-group">
-                                                <label>Kategori</label>
-                                                <input type="text" name="kategori" class="form-control">
+                                                <label for="kategori">Kategori</label>
+                                                <input type="text" name="kategori" class="form-control"
+                                                    id="kategori-tags" data-role="tagsinput">
+                                                <small class="form-text text-muted">Masukkan beberapa kategori
+                                                    dipisahkan dengan koma, spasi, atau enter.</small>
                                             </div>
+
                                             <div class="form-group">
                                                 <label>Judul</label>
                                                 <input type="text" name="judul" class="form-control">
@@ -222,11 +272,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Tahun</label>
-                                                <input type="date" name="tahun" class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Status</label>
-                                                <input type="text" name="status" class="form-control">
+                                                <input type="text" name="tahun" class="form-control">
                                             </div>
                                             <div class="card-footer text-end">
                                                 <button class="btn btn-primary mr-1" type="submit">Submit</button>
@@ -473,11 +519,32 @@
 
     </div>
     </div>
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
     <script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
     <script>
-        CKEDITOR.replace('isi');
+        CKEDITOR.replace('deskripsi');
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#kategori-tags').tagsinput({
+                trimValue: true,
+                confirmKeys: [13, 44, 32],
+                focusClass: 'my-focus-class'
+            });
+
+            $('.bootstrap-tagsinput input').on('focus', function() {
+                $(this).closest('.bootstrap-tagsinput').addClass('has-focus');
+            }).on('blur', function() {
+                $(this).closest('.bootstrap-tagsinput').removeClass('has-focus');
+            });
+        });
+    </script>
     <script>
         $(document).ready(function() {
             $(document).on('click', '.add-file-input', function() {
@@ -494,7 +561,6 @@
                     '</div>'
                 );
             });
-
             $(document).on('click', '.remove-file-input', function() {
                 $(this).closest('.file-input-wrapper').remove();
             });

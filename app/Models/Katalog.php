@@ -19,7 +19,6 @@ class Katalog extends Model
         'foto',
         'video',
         'tahun',
-        'status',
     ];
 
     protected $dates = [

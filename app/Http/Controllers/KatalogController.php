@@ -36,7 +36,7 @@ class KatalogController extends Controller
             'deskripsi' => 'nullable|string',
             'foto.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:4096',
             'video' => 'nullable|file|mimes:mp4,mov,avi|max:20480',
-            'tahun' => 'nullable|date',
+            'tahun' => 'nullable|string',
             'status' => 'nullable|string|max:255',
         ]);
 
