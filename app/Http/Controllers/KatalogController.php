@@ -24,6 +24,12 @@ class KatalogController extends Controller
         //
     }
 
+    public function list()
+    {
+        $katalog = Katalog::all();
+        return view('admin.listKatalog', compact('katalog'));
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -86,8 +92,10 @@ class KatalogController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Katalog $katalog)
     {
-        //
+        $katalog->delete();
+
+        return redirect()->route('katalog.list')->with('success', 'Katalog berhasil dihapus.');
     }
 }

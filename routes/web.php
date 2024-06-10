@@ -23,5 +23,5 @@ Route::prefix('admin')->group(function () {
     Route::resource('/konten', KontenController::class);
     Route::resource('/katalog', KatalogController::class);
     Route::get('/list', [KontenController::class, 'list'])->name('konten.list');
-    Route::get('/listKatalog', [KatalogController::class, 'listKatalog'])->name('katalog.list');
+    Route::get('/listKatalog', [KatalogController::class, 'list'])->name('katalog.list');
 });
