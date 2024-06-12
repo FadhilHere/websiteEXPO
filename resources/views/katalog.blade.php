@@ -56,9 +56,10 @@
                         <div class="border p-2 rounded shadow">
                             <div class="overflow-hidden">
                                <!-- <a class="image-popup" href="{{ route('showkatalog', ['id' => $katalog->id]) }}"> -->
-                                <a href="{{ route('showkatalog', ['id' => $katalog->id]) }}">
-                                    <img src="{{ url('storage/' . $katalog->foto) }}" class="transition-all duration-500 origin-center hover:scale-[1.1]">
+                                <a href="{{ route('showkatalog', ['id' => $katalog->id]) }}" class="d-inline-block position-relative overflow-hidden">
+                                    <img src="{{ url('storage/' . $katalog->foto) }}" class="w-100 h-auto transition-transform origin-center hover-scale-110 object-fit-cover" style="max-width: 200px;">
                                 </a>
+
                             </div>
                             <h5 class="text-base font-medium mt-6">{{ $katalog->judul }}</h5>
                             <p class="text-slate-400 mt-2">{{ $katalog->kategori }}</p>

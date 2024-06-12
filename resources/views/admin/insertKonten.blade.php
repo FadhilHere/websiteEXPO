@@ -164,7 +164,7 @@
                             <ul class="dropdown-menu">
                                 <li><a class="nav-link " href="{{ route('konten.list') }}">Tabel
                                         Konten</a> </li>
-                                <li><a class="nav-link " href="{{ route('konten.list') }}">Tabel
+                                <li><a class="nav-link " href="{{ route('katalog.list') }}">Tabel
                                         Katalog</a> </li>
                             </ul>
                         </li>

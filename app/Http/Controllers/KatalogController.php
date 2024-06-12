@@ -24,6 +24,12 @@ class KatalogController extends Controller
         //
     }
 
+    public function list()
+    {
+        $katalog = Katalog::all();
+        return view('admin.listKatalog', compact('katalog'));
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -34,9 +40,9 @@ class KatalogController extends Controller
             'judul' => 'nullable|string|max:255',
             'author' => 'nullable|string|max:255',
             'deskripsi' => 'nullable|string',
-            'foto.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:4096',
+            'foto.*' => 'nullable|mimes:jpeg,png,jpg,gif,pdf|max:4096',
             'video' => 'nullable|file|mimes:mp4,mov,avi|max:20480',
-            'tahun' => 'nullable|date',
+            'tahun' => 'nullable|string',
             'status' => 'nullable|string|max:255',
         ]);
 
@@ -86,8 +92,10 @@ class KatalogController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Katalog $katalog)
     {
-        //
+        $katalog->delete();
+
+        return redirect()->route('katalog.list')->with('success', 'Katalog berhasil dihapus.');
     }
 }

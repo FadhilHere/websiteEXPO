@@ -112,10 +112,7 @@ function init() {
             slidesPerView: 1,
             spaceBetween: 30,
             loop: true,
-            autoplay: {
-                delay: 2500,
-                disableOnInteraction: false,
-            },
+            autoplay: false,
             pagination: {
                 el: ".swiper-pagination",
                 clickable: true,
@@ -155,7 +152,7 @@ function init() {
         });
     };
 
-    // Text Animation 
+    // Text Animation
     function initTypewrite() {
         var TxtType = function (el, toRotate, period) {
             this.toRotate = toRotate;
