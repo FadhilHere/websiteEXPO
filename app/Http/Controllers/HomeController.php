@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Katalog;
 use Illuminate\Http\Request;
 use App\Models\ManagementKonten;
+use Spatie\PdfToImage\Pdf;
 
 class HomeController extends Controller
 {
@@ -59,10 +60,12 @@ class HomeController extends Controller
                 $item->foto = str_replace(['[', ']', '"', '\\'], '', $item->foto);
                 return $item;
             });
+            $loadKategori = ManagementKonten::where('kategori', 'Kategori Produk')->first();
+            $loadKategori = explode(', ', $loadKategori->isi);
 
             $loadHeader = ManagementKonten::where('menu', 'Header')->get();
             $loadDropdown = ManagementKonten::whereNotNull('menu')->get()->groupBy('menu');
-            return view('katalog', compact('loadLogo', 'loadHeader', 'loadDropdown', 'loadKatalog'));
+            return view('katalog', compact('loadLogo', 'loadHeader', 'loadDropdown', 'loadKatalog', 'loadKategori'));
         }
 
         public function displayKatalog($id)
@@ -72,6 +75,7 @@ class HomeController extends Controller
             $loadLogo = preg_replace('/(uploads)([^\/])/', '$1/$2', $loadLogo);
             $katalog = Katalog::findOrFail($id);
             $katalog->foto = str_replace(['[', ']', '"', '\\'], '', $katalog->foto);
+
 
             $loadHeader = ManagementKonten::where('menu', 'Header')->get();
             $loadDropdown = ManagementKonten::whereNotNull('menu')->get()->groupBy('menu');
