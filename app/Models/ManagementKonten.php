@@ -22,4 +22,3 @@ class ManagementKonten extends Model
         'status'
     ];
 }
-
