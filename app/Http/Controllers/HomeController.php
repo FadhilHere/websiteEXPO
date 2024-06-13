@@ -20,11 +20,9 @@ class HomeController extends Controller
         $loadLogo = ManagementKonten::where('menu', 'Logo')->first();
         $loadLogo = str_replace(['[', ']', '\/', '"'], '', $loadLogo->file);
         $loadLogo = preg_replace('/(uploads)([^\/])/', '$1/$2', $loadLogo);
-        $loadKatalog = Katalog::all()->take(5)->map(function ($item) {
-            $item->foto = str_replace(['[', ']', '"', '\\'], '', $item->foto);
-            return $item;
-        });
-
+        $loadKatalog = ManagementKonten::where('kategori', 'Buku Katalog')->first();
+        $loadKatalog = str_replace(['[', ']', '\/', '"'], '', $loadKatalog->file);
+        $loadKatalog = preg_replace('/(uploads)([^\/])/', '$1/$2', $loadKatalog);
         $loadHeader = ManagementKonten::where('menu', 'Header')->get();
         $loadLanding = ManagementKonten::where('kategori', 'Landing')->first();
         $loadLanding->file = str_replace(['[', ']', '"', '\\'], '', $loadLanding->file);

@@ -68,7 +68,7 @@
                 <div class="col-xs-12" style="padding-bottom:30px">
                     <!-- Normal FLipbook -->
                     <div class="_df_book" height="500" webgl="true" backgroundcolor="white"
-                        source="{{ asset('assets/example-assets/books/intro.pdf') }}" id="df_manual_book">
+                        source="{{ url('storage/' . $loadKatalog) }}" id="df_manual_book">
                     </div>
 
                 </div>
