@@ -16,9 +16,9 @@ class HomeController extends Controller
 
     public function index()
     {
-        $loadLogo = ManagementKonten::where('menu', 'Logo')->first();
-        $loadLogo = str_replace(['[', ']', '\/', '"'], '', $loadLogo->file);
-        $loadLogo = preg_replace('/(uploads)([^\/])/', '$1/$2', $loadLogo);
+        // $loadLogo = ManagementKonten::where('menu', 'Logo')->first();
+        // $loadLogo = str_replace(['[', ']', '\/', '"'], '', $loadLogo->file);
+        // $loadLogo = preg_replace('/(uploads)([^\/])/', '$1/$2', $loadLogo);
         $loadKatalog = Katalog::all()->take(5)->map(function ($item) {
             $item->foto = str_replace(['[', ']', '"', '\\'], '', $item->foto);
             return $item;
@@ -28,7 +28,8 @@ class HomeController extends Controller
         $loadLanding = ManagementKonten::where('kategori', 'Landing')->first();
         $loadLanding->file = str_replace(['[', ']', '"', '\\'], '', $loadLanding->file);
         $loadDropdown = ManagementKonten::whereNotNull('menu')->get()->groupBy('menu');
-        return view('index', compact('loadLogo', 'loadHeader', 'loadDropdown', 'loadLanding', 'loadKatalog'));
+        return view('index', compact('loadHeader', 'loadDropdown', 'loadLanding', 'loadKatalog'));
+        // return view('index', compact('loadLogo', 'loadHeader', 'loadDropdown', 'loadLanding', 'loadKatalog'));
     }
 
     public function login()
@@ -51,32 +52,33 @@ class HomeController extends Controller
     }
 
     public function katalog()
-        {
-            $loadLogo = ManagementKonten::where('menu', 'Logo')->first();
-            $loadLogo = str_replace(['[', ']', '\/', '"'], '', $loadLogo->file);
-            $loadLogo = preg_replace('/(uploads)([^\/])/', '$1/$2', $loadLogo);
-            $loadKatalog = Katalog::all()->map(function ($item) {
-                $item->foto = str_replace(['[', ']', '"', '\\'], '', $item->foto);
-                return $item;
-            });
+    {
+        // $loadLogo = ManagementKonten::where('menu', 'Logo')->first();
+        // $loadLogo = str_replace(['[', ']', '\/', '"'], '', $loadLogo->file);
+        // $loadLogo = preg_replace('/(uploads)([^\/])/', '$1/$2', $loadLogo);
+        $loadKatalog = Katalog::all()->map(function ($item) {
+            $item->foto = str_replace(['[', ']', '"', '\\'], '', $item->foto);
+            return $item;
+        });
 
-            $loadHeader = ManagementKonten::where('menu', 'Header')->get();
-            $loadDropdown = ManagementKonten::whereNotNull('menu')->get()->groupBy('menu');
-            return view('katalog', compact('loadLogo', 'loadHeader', 'loadDropdown', 'loadKatalog'));
-        }
+        $loadHeader = ManagementKonten::where('menu', 'Header')->get();
+        $loadDropdown = ManagementKonten::whereNotNull('menu')->get()->groupBy('menu');
+        // return view('katalog', compact('loadLogo', 'loadHeader', 'loadDropdown', 'loadKatalog'));
+        return view('katalog', compact('loadHeader', 'loadDropdown', 'loadKatalog'));
+    }
 
-        public function displayKatalog($id)
-        {
-            $loadLogo = ManagementKonten::where('menu', 'Logo')->first();
-            $loadLogo = str_replace(['[', ']', '\/', '"'], '', $loadLogo->file);
-            $loadLogo = preg_replace('/(uploads)([^\/])/', '$1/$2', $loadLogo);
-            $katalog = Katalog::findOrFail($id);
-            $katalog->foto = str_replace(['[', ']', '"', '\\'], '', $katalog->foto);
+    public function displayKatalog($id)
+    {
+        $loadLogo = ManagementKonten::where('menu', 'Logo')->first();
+        $loadLogo = str_replace(['[', ']', '\/', '"'], '', $loadLogo->file);
+        $loadLogo = preg_replace('/(uploads)([^\/])/', '$1/$2', $loadLogo);
+        $katalog = Katalog::findOrFail($id);
+        $katalog->foto = str_replace(['[', ']', '"', '\\'], '', $katalog->foto);
 
-            $loadHeader = ManagementKonten::where('menu', 'Header')->get();
-            $loadDropdown = ManagementKonten::whereNotNull('menu')->get()->groupBy('menu');
-            return view('katalog_satu', compact('loadLogo', 'loadHeader', 'loadDropdown', 'katalog'));
-        }
+        $loadHeader = ManagementKonten::where('menu', 'Header')->get();
+        $loadDropdown = ManagementKonten::whereNotNull('menu')->get()->groupBy('menu');
+        return view('katalog_satu', compact('loadLogo', 'loadHeader', 'loadDropdown', 'katalog'));
+    }
 
     /**
      * Show the form for creating a new resource.

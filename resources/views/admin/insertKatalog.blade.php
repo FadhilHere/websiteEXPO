@@ -550,7 +550,7 @@
             $(document).on('click', '.add-file-input', function() {
                 $('#file-inputs').append(
                     '<div class="form-group file-input-wrapper">' +
-                    '<label>File</label>' +
+                    '<label>Foto</label>' +
                     '<input type="file" name="foto[]" class="form-control">' +
                     '<button type="button" class="btn btn-icon btn-primary add-file-input">' +
                     '<i class="fas fa-plus"></i>' +
