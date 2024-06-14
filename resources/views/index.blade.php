@@ -5,6 +5,14 @@
     @include('partials.title-meta', ['title' => 'EXPO Landing Page'])
 
     @include('partials.head-css')
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link href="{{ asset('assets/css/dflip.min.css') }}" rel="stylesheet" type="text/css">
+
+    <!-- Icons Stylesheet -->
+    <link href="{{ asset('assets/css/themify-icons.min.css') }}" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 
 <body class="text-gray-700">
@@ -47,8 +55,6 @@
             </div>
         </section>
 
-
-
         <div class="absolute bottom-0 inset-x-0 hidden sm:block">
             <img src="assets/images/shapes/white-wave.svg" alt="svg" class="w-full -scale-x-100 -scale-y-100">
         </div>
@@ -57,54 +63,62 @@
 
     <section class="py-16 overflow-x-hidden">
         <div class="container">
-            <h3 class="text-2xl mb-12 justify-center text-center">Katalog</h3>
-            <div>
-                <div class="relative">
-                    <div class="hidden sm:block">
-                        <div
-                            class="before:w-24 before:h-24 before:absolute before:-top-8 before:-end-8 before:bg-[url('../images/pattern/dot5.svg')]">
-                        </div>
-                        <div
-                            class="after:w-24 after:h-24 after:absolute after:-bottom-8 after:-start-8 after:bg-[url('../images/pattern/dot2.svg')]">
-                        </div>
-                    </div>
-                    <div id="swiper_one" class="swiper relative">
-                        <div class="swiper-wrapper z-10">
-                            @foreach ($loadKatalog as $katalog)
-                            <div class="swiper-slide flex justify-center items-center p-10">
-                                <img src="{{ asset('storage/' . $katalog->foto) }}" class="max-w-xs max-h-48 object-cover" width="200" height="200" onclick="openModal('{{$loop->index}}')">
-                            </div>
-                            @endforeach
-                        </div>
-                        <!-- Add Navigation -->
-                    </div>
 
-                    <!-- Custom Modal (Outside Swiper) -->
-                    @foreach ($loadKatalog as $katalog)
-                    <div id="bookModal{{$loop->index}}" class="modal">
-                        <span class="close" onclick="closeModal('{{$loop->index}}')">&times;</span>
-                        <div class="modal-content">
-                            <!-- Container for Turn.js -->
-                            <div id="book{{$loop->index}}" class="flipbook">
-                                <!-- Pages will be added here dynamically -->
-                            </div>
-                        </div>
+            <div class="row">
+                <div class="col-xs-12" style="padding-bottom:30px">
+                    <!-- Normal FLipbook -->
+                    <div class="_df_book" height="500" webgl="true" backgroundcolor="white"
+                        source="{{ url('storage/' . $loadKatalog) }}" id="df_manual_book">
                     </div>
-                    @endforeach
 
                 </div>
             </div>
         </div>
+        {{-- <div class="container">
+            <div class="book-wrapper">
+                <div class="book-cover">
+                    <img src="https://github.com/slyka85/assets/blob/master/bookcover2.png?raw=true" alt="">
+                </div>
+                <div class="pages-container">
+                    <div class="pages">
+                        @foreach ($loadKatalog as $index => $katalog)
+                            <div class="page-num-{{ $index + 1 }}">
+                                <div class="pages-content">
+                                    <div class="pages-background"></div>
+                                    <div class="content-inner">
+                                        <div class="page">
+                                            <img src="{{ url('storage/' . $katalog->foto) }}" style="max-width: 200px; height: auto;"class="rounded-md">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
+            </div>
+
+        </div> --}}
     </section>
+    <div class="button">
+        <a id="read" class="btn btn-primary mt-2 text-white">Baca PDF <i class="fas fa-book-reader fa-lg"></i></a>
+        <a href="pdf/pdf.pdf" class="btn btn-primary mt-2 text-white" download>Unduh PDF <i class="fas fa-download fa-lg"></i></a>
+      </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <!-- =========== Hero Section End =========== -->
 
     <!-- =========== footer Section Start =========== -->
-    @include('partials/footer')
+    @include('partials.footer')
     <!-- =========== footer Section end =========== -->
 
     @include('partials.back-to-top')
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     @include('partials.footer-scripts')
+
+    <!-- jQuery -->
+    <script src="{{ asset('assets/js/jquery.min.js') }}" type="text/javascript"></script>
+    <!-- Flipbook main Js file -->
+    <script src="{{ asset('assets/js/dflip.min.js') }}" type="text/javascript"></script>
 
 </body>
 

@@ -17,6 +17,9 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home')->withoutMiddleware('auth');
+Route::get('/bookview', function () {
+    return view('example2')->withoutMiddleware('auth'); // Returns the Blade view named 'default-book-view'
+});
 Route::get('/katalog', [HomeController::class, 'katalog'])->name('katalog')->withoutMiddleware('auth');
 Route::get('/katalog/{id}', [HomeController::class, 'displayKatalog'])->name('showkatalog')->withoutMiddleware('auth');
 Route::resource('/flipbook', 'rudrarajiv\flipbooklaravel\FlipBookController')->withoutMiddleware('auth');
@@ -29,3 +32,4 @@ Route::prefix('admin')->group(function () {
     Route::get('/list', [KontenController::class, 'list'])->name('konten.list');
     Route::get('/listKatalog', [KatalogController::class, 'list'])->name('katalog.list');
 });
+

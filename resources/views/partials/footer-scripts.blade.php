@@ -11,9 +11,8 @@
 <script src="{{ asset('assets/js/theme.min.js') }}"></script>
 
 <!-- PDF.js -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/turn.js/4.0.1/turn.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/4.0.1/turn.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/turn.js/4.1.0/turn.min.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/4.1.0/turn.min.js"></script>
 
 
 

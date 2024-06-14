@@ -19,7 +19,7 @@
             <div>
                 <p class=" text-sm text-slate-500">
                     <script>document.write(new Date().getFullYear())</script>© Prompt. All rights reserved. Crafted
-                    by <a href="#" class="text-gray-800 hover:text-primary transition-all font-medium">Coderthemes</a>
+                    by <a href="#" class="text-gray-800 hover:text-primary transition-all font-medium">MMZ Riset Team</a>
                 </p>
             </div>
 
