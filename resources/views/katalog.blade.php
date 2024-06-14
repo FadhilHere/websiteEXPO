@@ -34,10 +34,10 @@
                     <li class="inline-block active" data-group="all">
                         <a href="javascript: void(0);">All</a>
                     </li>
-                    @foreach($loadKategori as $kategori)
-                    <li class="inline-block" data-group="{{ $kategori }}">
-                        <a href="javascript: void(0);">{{ $kategori }}</a>
-                    </li>
+                    @foreach ($loadKategori as $kategori)
+                        <li class="inline-block" data-group="{{ $kategori }}">
+                            <a href="javascript: void(0);">{{ $kategori }}</a>
+                        </li>
                     @endforeach
                 </ul>
             </div>
@@ -45,30 +45,36 @@
             <div id="gallery-wrapper" class="md:flex justify-center mx-auto mt-6">
 
                 @foreach ($loadKatalog as $katalog)
-                <div class="lg:w-1/3 md:w-1/2 p-2 picture-item" data-groups='["{{ $katalog->kategori }}"]'>
-                    <div class="border p-2 rounded shadow">
-                        <div class="flex justify-center items-center">
-                            <a href="{{ route('showkatalog', ['id' => $katalog->id]) }}" class="d-inline-block position-relative overflow-hidden">
-                                <img src="{{ url('storage/' . $katalog->foto) }}"
-                                    class="w-100 h-auto transition-transform origin-center hover-scale-110 object-cover"
-                                    style="height: 200px;">
-                            </a>
-                        </div>
-                        <div class="p-4">
-                            <h5 class="text-lg font-semibold mb-2">{{ $katalog->judul }}</h5>
-                            <div class="flex items-center justify-between mb-4">
-                                <p class="text-gray-600">{{ $katalog->author }}</p>
-                                <p class="text-gray-600">{{ $katalog->tahun }}</p>
+                    <div class="lg:w-1/3 md:w-1/2 p-2 picture-item" data-groups='["{{ $katalog->kategori }}"]'>
+                        <div class="p-2 rounded">
+                            <div class="flex justify-center items-center">
+                                <a href="{{ route('showkatalog', ['id' => $katalog->id]) }}"
+                                    class="d-inline-block position-relative overflow-hidden">
+                                    <img src="{{ url('storage/' . $katalog->foto) }}"
+                                        class="w-100 h-auto transition-transform origin-center hover-scale-110 object-cover"
+                                        style="height: 200px;">
+                                </a>
                             </div>
-                            <p class="text-gray-700 mb-4" style="max-height: 100px; overflow: hidden; text-overflow: ellipsis;">
-                                {{ substr(str_replace('&nbsp;', ' ', strip_tags($katalog->deskripsi)), 0, 100) }}{{ strlen(strip_tags($katalog->deskripsi)) > 45 ? '...' : '' }}
-                            </p>
-                            <a href="{{ route('showkatalog', ['id' => $katalog->id]) }}"
-                                class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300">Lihat Produk</a>
+                            <div class="p-4">
+                                <h5 class="text-lg font-semibold">{{ $katalog->judul }}</h5>
+                                <div class="mb-2">
+                                    <p class="text-muted d-inline">{{ $katalog->author }} - {{ $katalog->tahun }}</p>
+                                </div>
+
+                                <p class="text-muted mb-2"
+                                    style="font-size: 12px; max-height: 100px; overflow: hidden; text-overflow: ellipsis;">
+                                    {{ substr(str_replace('&nbsp;', ' ', strip_tags($katalog->deskripsi)), 0, 30) }}{{ strlen(strip_tags($katalog->deskripsi)) > 45 ? '...' : '' }}
+                                </p>
+
+                                <a href="{{ route('showkatalog', ['id' => $katalog->id]) }}"
+                                    class="inline-block text-center border border-blue-500 text-blue-500 px-4 py-2 rounded hover:bg-blue-500 hover:text-black w-full transition duration-300">
+                                    Lihat Produk
+                                </a>
+
+                            </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
 
 
 
@@ -141,8 +147,7 @@
                             <script>
                                 document.write(new Date().getFullYear())
                             </script>© Prompt. All rights reserved. Crafted
-                            by <a href="#"
-                                class="text-gray-800 hover:text-primary transition-all">Coderthemes</a>
+                            by <a href="#" class="text-gray-800 hover:text-primary transition-all">Coderthemes</a>
                         </p>
                     </div>
 

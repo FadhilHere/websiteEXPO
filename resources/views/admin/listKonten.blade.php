@@ -139,6 +139,17 @@
                                     <line x1="12" y1="17" x2="12" y2="21"></line>
                                 </svg><span>Tambah Konten</span></a>
                         </li>
+                        <li class="dropdown">
+                            <a href="{{ route('katalog.index') }}" class="nav-link toggled"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-monitor">
+                                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2">
+                                    </rect>
+                                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                                </svg><span>Tambah Katalog</span></a>
+                        </li>
                         <li class="menu-header">Table</li>
                         <li class="dropdown active">
                             <a href="#" class="menu-toggle nav-link has-dropdown toggled"><svg
@@ -153,7 +164,7 @@
                             <ul class="dropdown-menu">
                                 <li class="active"><a class="nav-link " href="{{ route('konten.list') }}">Tabel
                                         Konten</a> </li>
-                                <li><a class="nav-link " href="{{ route('konten.list') }}">Tabel
+                                <li><a class="nav-link " href="{{ route('katalog.list') }}">Tabel
                                         Katalog</a> </li>
                             </ul>
                         </li>
@@ -168,7 +179,7 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4>List</h4>
+                                        <h4>List Konten</h4>
                                     </div>
                                     <div class="card-body">
                                         <div class="table-responsive">
@@ -239,28 +250,26 @@
                                                             <td>{{ $item->submenu }}</td>
                                                             <td>
                                                                 @if ($item->file && is_array(json_decode($item->file)))
-                                                                    <!-- Menampilkan gambar pertama saja -->
-                                                                    @php $firstImage = true; @endphp
-                                                                    @foreach (json_decode($item->file) as $file)
-                                                                        @if ($firstImage)
-                                                                            <a href="#"
-                                                                                class="btn btn-primary btn-sm view-image"
-                                                                                data-toggle="modal"
-                                                                                data-target="#imageModal"
-                                                                                data-image="{{ asset('storage/' . $file) }}">Lihat
-                                                                                Gambar</a>
-                                                                            @php $firstImage = false; @endphp
-                                                                        @endif
-                                                                        <br>
-                                                                    @endforeach
+                                                                    <a href="#"
+                                                                        class="btn btn-primary btn-sm view-image"
+                                                                        data-toggle="modal" data-target="#imageModal"
+                                                                        data-images="{{ json_encode(array_map(fn($file) => asset('storage/' . $file), json_decode($item->file))) }}">
+                                                                        Lihat Gambar
+                                                                    </a>
                                                                 @endif
                                                             </td>
 
-
-
                                                             <td>{{ $item->status }}</td>
                                                             <td class="text-center">
-                                                                <!-- Actions (e.g., edit and delete buttons) -->
+                                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');"
+                                                                    action="{{ route('konten.destroy', $item->id) }}"
+                                                                    method="POST" style="display:inline;">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit"
+                                                                        class="btn btn-danger btn-sm">Delete</button>
+                                                                </form>
+                                                                <!-- Other actions (e.g., edit button) can be added here -->
                                                             </td>
                                                         </tr>
                                                     @empty
@@ -274,7 +283,6 @@
                                                     @endforelse
                                                 </tbody>
                                             </table>
-
                                         </div>
                                     </div>
                                 </div>
@@ -295,12 +303,14 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <!-- Tempat untuk menampilkan gambar -->
-                            <img src="" class="img-fluid" id="imagePreview" alt="Gambar">
+                            <!-- Tempat untuk menampilkan semua gambar -->
+                            <div id="imageContainer"></div>
                         </div>
                     </div>
                 </div>
             </div>
+
+
             <div class="settingSidebar">
                 <a href="javascript:void(0)" class="settingPanelToggle"> <i class="fa fa-spin fa-cog"></i>
                 </a>
@@ -533,39 +543,36 @@
     </div>
     </div>
     <script>
-        $(document).on('click', '.view-image', function() {
-            var imageUrl = $(this).data('image');
-            $('#imagePreview').attr('src', imageUrl);
-            $('#imageModal').modal('show');
+        document.addEventListener('DOMContentLoaded', function() {
+            const viewImageLinks = document.querySelectorAll('.view-image');
+
+            viewImageLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const images = JSON.parse(this.getAttribute('data-images'));
+                    const imageContainer = document.getElementById('imageContainer');
+                    imageContainer.innerHTML =
+                        ''; // Kosongkan kontainer gambar sebelum menambahkan gambar baru
+
+                    images.forEach(imageUrl => {
+                        const imgElement = document.createElement('img');
+                        imgElement.src = imageUrl;
+                        imgElement.className = 'img-fluid mb-2';
+                        imgElement.style.maxWidth = '100%';
+                        imageContainer.appendChild(imgElement);
+                    });
+                });
+            });
         });
     </script>
+
+
     <script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
     <script>
         CKEDITOR.replace('isi');
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $(document).on('click', '.add-file-input', function() {
-                $('#file-inputs').append(
-                    '<div class="form-group file-input-wrapper">' +
-                    '<label>File</label>' +
-                    '<input type="file" name="file[]" class="form-control">' +
-                    '<button type="button" class="btn btn-icon btn-primary add-file-input">' +
-                    '<i class="fas fa-plus"></i>' +
-                    '</button>' +
-                    '<button type="button" class="btn btn-icon btn-danger remove-file-input">' +
-                    '<i class="fas fa-minus"></i>' +
-                    '</button>' +
-                    '</div>'
-                );
-            });
 
-            $(document).on('click', '.remove-file-input', function() {
-                $(this).closest('.file-input-wrapper').remove();
-            });
-        });
-    </script>
     <!-- General JS Scripts -->
     <script src="{{ asset('assets/js/app.min.js') }}"></script>
     <!-- JS Libraries -->

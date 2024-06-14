@@ -40,7 +40,7 @@ class KatalogController extends Controller
             'judul' => 'nullable|string|max:255',
             'author' => 'nullable|string|max:255',
             'deskripsi' => 'nullable|string',
-            'foto.*' => 'nullable|mimes:jpeg,png,jpg,gif,pdf|max:4096',
+            'foto.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:4096',
             'video' => 'nullable|file|mimes:mp4,mov,avi|max:20480',
             'tahun' => 'nullable|string',
             'status' => 'nullable|string|max:255',
